@@ -3,10 +3,12 @@
 #'
 #' @param   data    Data to process
 #' @param   h       Bandwidth
+#' @param   k       Neighborhood size, in case useKNN is TRUE.
+#' @param   useKNN  Should k-NN be used to determine the mean distance h?
 #' @param   lambda  Lambda, only used when KernelType is flat
 #' @param   maxIter Maximum number of iterations
 #' @param   eps     Stopping criterion for convergence.
-#' @param   KernelType  Type of the kernel to be used, either "gaussian" or "flat"
+#' @param   kernelType  Type of the kernel to be used, either "gaussian" or "flat"
 #' @return  List of groups of (index of) features that are closely related.
 #' @examples
 #'
@@ -53,7 +55,7 @@ DenseGroupFinder = function (data, k = 3, h = 0, useKNN = TRUE, lambda = 0.0, ma
             yNew = colSums(as.matrix(data) %*% diag(kernelValues))/kernelSum
 
             # convergence?
-			diff = get.knn(rbind(yNew, yOld), k=k)$nn.dist[1]
+			diff = FNN::get.knn(rbind(yNew, yOld), k=k)$nn.dist[1]
 			yOld = yNew
 			j = j+1
         }

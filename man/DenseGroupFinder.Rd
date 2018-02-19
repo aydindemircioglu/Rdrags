@@ -10,7 +10,11 @@ DenseGroupFinder(data, k = 3, h = 0, useKNN = TRUE, lambda = 0,
 \arguments{
 \item{data}{Data to process}
 
+\item{k}{Neighborhood size, in case useKNN is TRUE.}
+
 \item{h}{Bandwidth}
+
+\item{useKNN}{Should k-NN be used to determine the mean distance h?}
 
 \item{lambda}{Lambda, only used when KernelType is flat}
 
@@ -18,7 +22,7 @@ DenseGroupFinder(data, k = 3, h = 0, useKNN = TRUE, lambda = 0,
 
 \item{eps}{Stopping criterion for convergence.}
 
-\item{KernelType}{Type of the kernel to be used, either "gaussian" or "flat"}
+\item{kernelType}{Type of the kernel to be used, either "gaussian" or "flat"}
 }
 \value{
 List of groups of (index of) features that are closely related.

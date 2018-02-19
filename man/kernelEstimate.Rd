@@ -15,7 +15,7 @@ kernelEstimate(x1, x2, h, lambda, kernelType)
 
 \item{lambda}{Lambda, only used when KernelType is flat}
 
-\item{KernelType}{Type of the kernel to be used, either "gaussian" or "flat"}
+\item{kernelType}{Type of the kernel to be used, either "gaussian" or "flat"}
 }
 \value{
 Kernel value.

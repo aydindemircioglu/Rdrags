@@ -21,9 +21,11 @@ NULL
 #' @param   k       Neighborhood size for k-NN. Will only be used when useKNN is TRUE.
 #' @param   lambda  Lambda, only used when KernelType is flat
 #' @param   maxIter Maximum number of iterations
+#' @param   maxFeatures     Number of features to be selected.
+#' @param   useKNN  Should k-NN be used to determine the mean distance h?
 #' @param   eps     Stopping criterion for convergence.
 #' @param   kernelType  Type of the kernel to be used, either "gaussian" or "flat"
-#' @return  XXXXXXX
+#' @return  List of selected features.
 #' @examples
 #'
 #' @export

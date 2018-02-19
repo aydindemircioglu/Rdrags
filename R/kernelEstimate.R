@@ -5,7 +5,7 @@
 #' @param   x2      Second data point
 #' @param   h       Bandwidth
 #' @param   lambda  Lambda, only used when KernelType is flat
-#' @param   KernelType  Type of the kernel to be used, either "gaussian" or "flat"
+#' @param   kernelType  Type of the kernel to be used, either "gaussian" or "flat"
 #' @return  Kernel value.
 #' @examples
 #'

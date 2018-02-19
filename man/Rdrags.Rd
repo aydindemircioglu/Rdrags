@@ -13,9 +13,13 @@ Rdrags(data, maxFeatures = 10, h = 0, k = 5, useKNN = TRUE,
 \arguments{
 \item{data}{Data to process}
 
+\item{maxFeatures}{Number of features to be selected.}
+
 \item{h}{Bandwidth, will not be used when useKNN is TRUE.}
 
 \item{k}{Neighborhood size for k-NN. Will only be used when useKNN is TRUE.}
+
+\item{useKNN}{Should k-NN be used to determine the mean distance h?}
 
 \item{kernelType}{Type of the kernel to be used, either "gaussian" or "flat"}
 
@@ -26,7 +30,7 @@ Rdrags(data, maxFeatures = 10, h = 0, k = 5, useKNN = TRUE,
 \item{lambda}{Lambda, only used when KernelType is flat}
 }
 \value{
-XXXXXXX
+List of selected features.
 }
 \description{
 Rdrags implements the high-dimensional feature selection algorithm called
