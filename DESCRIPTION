@@ -1,0 +1,17 @@
+Package: Rdrags
+Type: Package
+Title: High-dimensional feature selection via Dense Relevant Attribute Group Selector.
+Version: 0.1
+Date: 2015-10-27
+Author: Aydin Demircioglu
+Maintainer: Aydin Demircioglu <aydin.demircioglu@ini.rub.de>
+Description: Implementation of the high-dimensional feature selection algorithm called Dense Relevant Attribute Group Selector.
+Copyright: None.
+License: GPL (>= 3)
+Imports: checkmate (>= 1.5.1), FNN (>= 1.1)
+Suggests: knitr,
+    testthat
+VignetteBuilder: knitr
+URL: http://github.com/aydindemircioglu/Rdrags
+BugReports: http://github.com/aydindemircioglu/Rdrags/issues
+RoxygenNote: 6.0.1

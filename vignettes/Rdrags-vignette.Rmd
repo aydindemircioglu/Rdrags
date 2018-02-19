@@ -1,0 +1,36 @@
+---
+title: "Rdrags"
+author: "Aydin Demircioglu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rdrags}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Introduction
+
+Feature selection in high dimensional spaces is a rather difficult task.
+Even if this search for the 'needle in the haystack' is successful, i.e.
+the performance of the overall algorithm with a subsequent learning machine,
+most featuer selection algorithms are not stable: Repeating the experiment
+with a different seed or within a cross-validation loop might yield completely
+different features. Yu, Ding and Loscalzo (KDD 2008) developed a more stable
+high-dimensional feature selection algorithm, called "Dense Relevant Attribute Group Selector"
+(DRAGS). This package implements their algorithms, closely following the
+java implementation in Rapidminer (see http://sourceforge.net/projects/rm-featselext),
+programmed by Viswanath Sivakumar.
+
+
+
+## Example
+
+
+```{r, echo=TRUE, results='asis', eval=TRUE}
+library(Rdrags)
+
+error = 2
+cat ("Error rate is ", error)
+```
