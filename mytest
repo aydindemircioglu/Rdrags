@@ -1,1 +1,1 @@
-./cleanup ; Rscript ./compile.R; R CMD build .; R CMD check --as-cran ./Rdrags.0.1.tar.gz
+./cleanup ; Rscript ./compile.R; R CMD build .; R CMD check --as-cran ./Rdrags_0.1.tar.gz

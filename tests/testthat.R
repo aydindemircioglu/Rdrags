@@ -1,4 +1,4 @@
 library(testthat)
-library(simanle)
+library(Rdrags)
 
-test_check("simanle")
+test_check("Rdrags")

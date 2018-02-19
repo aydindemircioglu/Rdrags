@@ -10,6 +10,7 @@
 #' @return  List of groups of (index of) features that are closely related.
 #' @examples
 #'
+#' @importFrom stats dist
 #' @export
 
 DenseGroupFinder = function (data, k = 3, h = 0, useKNN = TRUE, lambda = 0.0, maxIter = 100, eps = 1e-5, kernelType = "gaussian") {

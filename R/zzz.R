@@ -1,9 +1,6 @@
 #!/usr/bin/Rscript  --vanilla
 
 
-#' @useDynLib Rdrags
-
-
 # create own environment
 RdragsEnv = new.env(parent = emptyenv())
 
@@ -34,5 +31,4 @@ RdragsEnv = new.env(parent = emptyenv())
 
 
 .onUnload <- function (libpath) {
-	library.dynam.unload("Rdrags", libpath)
 }

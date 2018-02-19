@@ -2,4 +2,4 @@
 
 export(DenseGroupFinder)
 export(Rdrags)
-useDynLib(Rdrags)
+importFrom(stats,dist)
