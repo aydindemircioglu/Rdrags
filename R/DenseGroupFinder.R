@@ -1,7 +1,7 @@
 
 #' Dense Group Finder
 #'
-#' @param   data    Data to process
+#' @param   data    Data to process, (of dimension nxd)
 #' @param   h       Bandwidth
 #' @param   k       Neighborhood size, in case useKNN is TRUE.
 #' @param   useKNN  Should k-NN be used to determine the mean distance h?
@@ -30,6 +30,7 @@ DenseGroupFinder = function (data, k = 3, h = 0, useKNN = TRUE, lambda = 0.0, ma
     # and each data point corresponds to a row
     n = nrow(data)
     d = ncol(data)
+    message("Data has dim ", n, "x", d)
 
     # use KNN? then recompute h
     if (useKNN == TRUE) {
@@ -43,6 +44,7 @@ DenseGroupFinder = function (data, k = 3, h = 0, useKNN = TRUE, lambda = 0.0, ma
 
     # main loop
     for (i in seq(1,n)) {
+        message ("Element ", i)
         yOld = data[i, ]
 
         # Iterate until convergence
@@ -52,34 +54,49 @@ DenseGroupFinder = function (data, k = 3, h = 0, useKNN = TRUE, lambda = 0.0, ma
             # compute next shift
 			kernelValues = kernelEstimate(yOld, data, h = h, lambda = lambda, kernelType = kernelType) #ndim
 			kernelSum = sum(kernelValues)
-            yNew = colSums(as.matrix(data) %*% diag(kernelValues))/kernelSum
+            yNew = t(t(as.matrix(data)) %*% diag(kernelValues))
+            yNew = colSums(yNew)
 
             # convergence?
-			diff = FNN::get.knn(rbind(yNew, yOld), k=k)$nn.dist[1]
+			diff = FNN::get.knn(rbind(yNew, yOld), k=1)$nn.dist[1]
 			yOld = yNew
 			j = j+1
         }
+        message("Finished.")
 
         # compute distances to peaks
-        pd = dist (yOld, peaks)
-        minIndex = as.numeric(which.min(as.matrix(dist(cbind(pd,1)))[1,-1]))
-        minDist = min(as.matrix(dist(cbind(pd,1)))[1,-1]) #cbind correct?
+        if (is.null(peaks) == FALSE) {
+            print (dim(rbind(yOld, peaks)))
+            pd = dist (rbind(yOld, peaks))
+            minIndex = as.numeric(which.min(as.matrix(dist(cbind(pd,1)))[1,-1]))
+            minDist = min(as.matrix(dist(cbind(pd,1)))[1,-1]) #cbind correct?
 
-        # create either a new peak or merge with existing peak
-		if ((minIndex >= 0) && (minDist < h)) {
-            peaks [minIndex,] = (peaks[minIndex,] + yOld)/2.0
-		} else {
+            # create either a new peak or merge with existing peak
+    		if ((minIndex >= 0) && (minDist < h)) {
+                peaks [minIndex,] = (peaks[minIndex,] + yOld)/2.0
+    		} else {
+                peaks = addRow (peaks, yOld)
+    		}
+        } else {
+            # initialize
             peaks = addRow (peaks, yOld)
-		}
+        }
 	}
-
+    #print (peaks)
+    print (dim(peaks))
 	# For each unique peak, group all the features with distance < h
     denseGroups = list()
-    for (j in ncol(peaks)) {
+    for (j in 1:nrow(peaks)) {
         # dist of jth peaks to all data points
+        ad = rbind (peaks[j,], data)
+        print (dim(ad))
+        print (dim(as.matrix(dist (rbind (peaks[j,], data)))))
+        print("X")
         d = as.matrix(dist (rbind (peaks[j,], data)))[1,][-1]
+        print("Y")
         denseGroups = c(denseGroups, list(which(d<h)))
 	}
+    print("Z")
 
     # remove empty groups
     denseGroups = Filter (length, denseGroups)
